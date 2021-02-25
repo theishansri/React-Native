@@ -3,7 +3,7 @@ import {View, Text, Image, StyleSheet, FlatList} from 'react-native';
 
 const ResultsDetail=({results})=>{
     return(
-        <View>
+        <View style={styles.container}>
             <Image style={styles.image} source={{uri:results.image_url}}/>
             <Text style={styles.imageText}>{results.name}</Text>
             <Text>{results.rating} Stars, {results.review_count} reviews</Text>
@@ -12,6 +12,9 @@ const ResultsDetail=({results})=>{
 }
 
 const styles=StyleSheet.create({
+    container:{
+        marginLeft:15
+    },
     title:{
         fontSize:18,
         fontWeight:'bold'

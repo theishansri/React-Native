@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import SearchBar from '../components/searchBar';
 import useResults from '../hooks/useResults';
 import ResultsList from '../components/resultsList';
@@ -12,24 +12,26 @@ const SearchScreen=()=>{
         });
     };
     return(
-        <View style={styles.backGround}>
+        <>
             <SearchBar term={term} 
             onTermChange={searchTerm}
-            onTermSubmit={searchApi}
+            onTermSubmit={()=>searchApi(term)}
             />
             {errorMessage?<Text>{errorMessage}</Text>:null}
-            <Text>We have found {results.length} restaraunts</Text>
-            <ResultsList title="Cost Effective" results={fiterResults('$')}/>
-            <ResultsList title="Big Pricer" results={fiterResults('$$')}/>
-            <ResultsList title="Big Spender" results={fiterResults('$$$')}/>
-            <ResultsList title="Costiliest" results={fiterResults('$$$$')}/>
-        </View>
+            <ScrollView>
+                <ResultsList title="Cost Effective" results={fiterResults('$')}/>
+                <ResultsList title="Big Pricer" results={fiterResults('$$')}/>
+                <ResultsList title="Big Spender" results={fiterResults('$$$')}/>
+                <ResultsList title="Costiliest" results={fiterResults('$$$$')}/>
+            </ScrollView>
+        </>
     )
 }
 
 const styles= StyleSheet.create({
     backGround:{
-        backgroundColor:'#fff'
+        backgroundColor:'#fff',
+        flex:1
     }
 });
 export default SearchScreen;
